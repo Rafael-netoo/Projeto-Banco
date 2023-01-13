@@ -1,13 +1,13 @@
 package dados;
 
-import exception.ElementoJaExisteException;
-import exception.ElementoNaoExisteException;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class RepositorioGenerico<R> {
+import exception.ElementoJaExisteException;
+import exception.ElementoNaoExisteException;
+
+public class RepositorioGenerico<R> implements IRepositorioGenerico<R>{
     protected List<R> elementos;
 
     private String filename;
