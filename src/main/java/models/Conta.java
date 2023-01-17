@@ -9,6 +9,7 @@ public abstract class Conta {
     private String  agencia;
     private String tipo;
     private List<String> pix;
+    private  double saldo;
 
     public Conta(Cliente cliente, String numero, String agencia, String tipo, List<String> pix) {
         this.cliente = cliente;
@@ -56,5 +57,13 @@ public abstract class Conta {
 
     public void setPix(List<String> pix) {
         this.pix = pix;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
     }
 }
