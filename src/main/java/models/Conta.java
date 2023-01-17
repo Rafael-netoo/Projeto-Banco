@@ -11,12 +11,13 @@ public abstract class Conta {
     private List<String> pix;
     private  double saldo;
 
-    public Conta(Cliente cliente, String numero, String agencia, String tipo, List<String> pix) {
+    public Conta(Cliente cliente, String numero, String agencia, String tipo, List<String> pix,double saldo) {
         this.cliente = cliente;
         this.numero = numero;
         this.agencia = agencia;
         this.tipo = tipo;
         this.pix = pix;
+        this.saldo = saldo;
     }
 
     public Cliente getCliente() {
