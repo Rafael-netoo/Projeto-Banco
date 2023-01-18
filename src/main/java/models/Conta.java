@@ -11,7 +11,7 @@ public abstract class Conta {
     private List<String> pix;
     private  double saldo;
 
-    public Conta(Cliente cliente, String numero, String agencia, String tipo, List<String> pix,double saldo) {
+    public Conta(Cliente cliente, String numero, String agencia, String tipo, List<String> pix, double saldo) {
         this.cliente = cliente;
         this.numero = numero;
         this.agencia = agencia;
@@ -67,4 +67,6 @@ public abstract class Conta {
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
+
+
 }
