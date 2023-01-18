@@ -10,6 +10,7 @@ import exception.ElementoJaExisteException;
 import exception.ElementoNaoExisteException;
 import models.Conta;
 import models.ContaPoupanca;
+import models.Transacao;
 
 public class ControladorContas {
 
@@ -43,17 +44,22 @@ public class ControladorContas {
         this.repositorioDeContas.atualizar(newObj);
     }
 
-    public void transferir(Conta recebe, Conta envia, double saldo){
+    public void transferir(Conta receptor, Conta pagador, double saldo){
         List<Conta> listConta =  repositorioDeContas.listar();
 
         for(int i = 0; i < listConta.size(); i++){
 
-            if(listConta.get(i).getAgencia().equals(recebe.getAgencia()) && listConta.get(i).getNumero().equals(recebe.getNumero())){
-                if(envia.getSaldo() >= saldo){
-                    double novoSaldo = envia.getSaldo() - saldo;
-                    envia.setSaldo(novoSaldo);
-                    double novoSaldoReceptor = recebe.getSaldo() + saldo;
-                    recebe.setSaldo(novoSaldoReceptor);
+            if(listConta.get(i).getAgencia().equals(receptor.getAgencia()) && listConta.get(i).getNumero().equals(receptor.getNumero())){
+                if(pagador.getSaldo() >= saldo){
+                    double novoSaldo = pagador.getSaldo() - saldo;
+                    pagador.setSaldo(novoSaldo);
+                    Transacao transacaoPagador = new Transacao(receptor.getCliente().getNome(), saldo);
+                    pagador.getTransacoes().add(transacaoPagador);
+
+                    double novoSaldoReceptor = receptor.getSaldo() + saldo;
+                    receptor.setSaldo(novoSaldoReceptor);
+                    Transacao transacaoReceptor = new Transacao(pagador.getCliente().getNome(), saldo);
+                    receptor.getTransacoes().add(transacaoReceptor);
                 }
             }
 
@@ -70,6 +76,13 @@ public class ControladorContas {
                     if(conta.getSaldo() >= valor){
                         repositorioDeContas.listar().get(i).setSaldo(repositorioDeContas.listar().get(i).getSaldo() + valor);
                         conta.setSaldo(conta.getSaldo() - valor);
+
+                        String nomeReceptor = listContas.get(i).getCliente().getNome();
+                        Transacao transacaoPagador = new Transacao(nomeReceptor, valor);
+                        conta.getTransacoes().add(transacaoPagador);
+
+                        Transacao transacaoReceptor = new Transacao(conta.getCliente().getNome(), valor);
+                        listContas.get(i).getTransacoes().add(transacaoReceptor);
                     }
                     //  }
 
@@ -88,4 +101,9 @@ public class ControladorContas {
         }
     }
 
+    public void gerarExtrato(Conta conta){
+
+        conta.getTransacoes().toString();
+
+    }
 }

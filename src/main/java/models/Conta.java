@@ -1,6 +1,7 @@
 package models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,7 @@ public abstract class Conta {
     private String tipo;
     private List<String> pix;
     private  double saldo;
+    private List<Transacao> transacoes;
 
     private LocalDate dtbertura;
 
@@ -22,6 +24,7 @@ public abstract class Conta {
         this.tipo = tipo;
         this.pix = pix;
         this.saldo = saldo;
+        this.transacoes = new ArrayList<>();
         this.dtbertura = LocalDate.now();
     }
 
@@ -71,6 +74,14 @@ public abstract class Conta {
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
+    }
+
+    public List<Transacao> getTransacoes() {
+        return transacoes;
+    }
+
+    public void setTransacoes(List<Transacao> transacoes) {
+        this.transacoes = transacoes;
     }
 
     public LocalDate getDtbertura() {
