@@ -1,5 +1,6 @@
 package negocio;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import exception.ElementoJaExisteException;
@@ -74,5 +75,16 @@ public class ServidorBanco {
     public void atualizar(Usuario newObj) throws ElementoNaoExisteException {
         this.controladorUsuarios.atualizar(newObj);
     }
+
+    public void jurosPoupança(Conta conta){
+        LocalDate ultimoJuros = conta.getDtbertura();
+        if(conta instanceof ContaPoupanca){
+            if(LocalDate.now().getDayOfYear() == ultimoJuros.getDayOfYear() + 31){
+                conta.setSaldo(conta.getSaldo() * 0.05);
+                conta.setDtbertura(ultimoJuros);
+            }
+        }
+    }
+
 
 }

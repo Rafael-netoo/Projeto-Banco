@@ -1,5 +1,6 @@
 package negocio;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,7 @@ import dados.RepositorioGenerico;
 import exception.ElementoJaExisteException;
 import exception.ElementoNaoExisteException;
 import models.Conta;
+import models.ContaPoupanca;
 
 public class ControladorContas {
 
@@ -73,6 +75,16 @@ public class ControladorContas {
 
                 }
             }
+        }
+    }
+
+    public void jurosPoupança(Conta conta){
+        LocalDate ultimoJuros = conta.getDtbertura();
+        if(conta instanceof ContaPoupanca){
+         if(LocalDate.now().getDayOfYear() == ultimoJuros.getDayOfYear() + 31){
+             conta.setSaldo(conta.getSaldo() * 0.05);
+             conta.setDtbertura(ultimoJuros);
+         }
         }
     }
 

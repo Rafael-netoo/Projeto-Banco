@@ -1,5 +1,7 @@
 package models;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public abstract class Conta {
@@ -11,6 +13,8 @@ public abstract class Conta {
     private List<String> pix;
     private  double saldo;
 
+    private LocalDate dtbertura;
+
     public Conta(Cliente cliente, String numero, String agencia, String tipo, List<String> pix, double saldo) {
         this.cliente = cliente;
         this.numero = numero;
@@ -18,6 +22,7 @@ public abstract class Conta {
         this.tipo = tipo;
         this.pix = pix;
         this.saldo = saldo;
+        this.dtbertura = LocalDate.now();
     }
 
     public Cliente getCliente() {
@@ -68,5 +73,11 @@ public abstract class Conta {
         this.saldo = saldo;
     }
 
+    public LocalDate getDtbertura() {
+        return dtbertura;
+    }
 
+    public void setDtbertura(LocalDate dtbertura) {
+        this.dtbertura = dtbertura;
+    }
 }
