@@ -57,5 +57,23 @@ public class ControladorContas {
 
         }
     }
+    public void fazerPix(Conta conta ,String pix ,double valor){
+        List<Conta> listContas  = new ArrayList<>();
+        listContas = repositorioDeContas.listar();
+        for(int i = 0; i < listContas.size(); i ++){
+            for(int j = 0 ; j < repositorioDeContas.listar().get(i).getPix().size() ; j++ ){
+                if(repositorioDeContas.listar().get(i).getPix().get(j).equals(pix)){
+                    //  for(int k = 0 ; k < listContas.size(); k++){
+                    //   if(repositorioDeContas.listar().get(k).equals(conta) && conta.getSaldo() >= valor){
+                    if(conta.getSaldo() >= valor){
+                        repositorioDeContas.listar().get(i).setSaldo(repositorioDeContas.listar().get(i).getSaldo() + valor);
+                        conta.setSaldo(conta.getSaldo() - valor);
+                    }
+                    //  }
+
+                }
+            }
+        }
+    }
 
 }
